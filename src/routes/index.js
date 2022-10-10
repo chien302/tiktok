@@ -12,6 +12,6 @@ const publicRoutes = [
     { path: '/profile', component: Profile },
     { path: '/search', component: Search, layout: null },
 ];
-const privateROutes = [];
+const privateRoutes = [];
 
-export { publicRoutes, privateROutes };
+export { publicRoutes, privateRoutes };
