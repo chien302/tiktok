@@ -7,7 +7,6 @@
 .menu-item {
     width: 100%;
     text-align: left;
-    margin: 0.5rem;
     border-radius: 0;
     padding: 11px 16px;
     line-height: 2rem;
@@ -16,6 +15,9 @@
         cursor: pointer;
         background-color: rgba(22, 24, 35, 0.03);
     }
+}
+.separate {
+    border-top: 1px solid rgba(22, 24, 35, 0.12);
 }
 
 //Header

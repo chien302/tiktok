@@ -34,6 +34,8 @@ const Menu = ({ children, items = [], onChange }) => {
         <Tippy
             interactive={true}
             delay={[0, 700]}
+            // visible
+            offset={[20, 10]}
             placement="bottom-end"
             render={(attrs) => (
                 <div className={cx('menu-list')} tabIndex="-1" {...attrs}>
@@ -41,13 +43,14 @@ const Menu = ({ children, items = [], onChange }) => {
                         {history.length > 1 && (
                             <Header
                                 title="Language"
-                                onBack={() => setHistory((prev) => prev.slice(0, history.length - 1))}
+                                onBack={() => setHistory((prev) => prev.slice(0, prev.length - 1))}
                             />
                         )}
                         {renderItem()}
                     </Wrapper>
                 </div>
             )}
+            onHide={() => setHistory((prev) => prev.slice(0, 1))}
         >
             {children}
         </Tippy>
