@@ -21,11 +21,12 @@ import {
     faUser,
     faArrowRightFromBracket,
 } from '@fortawesome/free-solid-svg-icons';
-import { faMessage, faCommentDots } from '@fortawesome/free-regular-svg-icons';
 import Wrapper from '~/components/Popper/Wrapper';
 import AccountItem from '~/components/AccountItem';
 import Button from '~/components/Button';
 import Menu from '~/components/Popper/Menu';
+import { IconInbox, IconMessage } from '~/components/Icons';
+import Image from '~/components/Image';
 const cx = classNames.bind(styles);
 
 const MENU_ITEMS = [
@@ -139,12 +140,12 @@ const Header = () => {
                             </Button>
                             <Tippy placement="bottom" content="Message">
                                 <button className={cx('actions-btn')}>
-                                    <FontAwesomeIcon icon={faCommentDots} />
+                                    <IconMessage />
                                 </button>
                             </Tippy>
                             <Tippy placement="bottom" content="Inbox">
                                 <button className={cx('actions-btn')}>
-                                    <FontAwesomeIcon icon={faMessage} />
+                                    <IconInbox />
                                 </button>
                             </Tippy>
                         </>
@@ -158,9 +159,9 @@ const Header = () => {
                     )}
                     <Menu items={currentUser ? userMenu : MENU_ITEMS} onChange={handleMenuChange}>
                         {currentUser ? (
-                            <img
+                            <Image
                                 className={cx('user-avatar')}
-                                src="https://p16-sign-va.tiktokcdn.com/tos-useast2a-avt-0068-giso/6389d4daedc46c24becb210be44bec2e~c5_100x100.jpeg?x-expires=1665943200&x-signature=h4fz6kPlhezGuEfNphGum%2BCKrx8%3D"
+                                src="ttps://p16-sign-va.tiktokcdn.com/tos-useast2a-avt-0068-giso/6389d4daedc46c24becb210be44bec2e~c5_100x100.jpeg?x-expires=1665943200&x-signature=h4fz6kPlhezGuEfNphGum%2BCKrx8%3D"
                                 alt="ten"
                             />
                         ) : (
