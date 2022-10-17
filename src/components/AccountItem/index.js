@@ -1,27 +1,25 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import classNames from 'classnames/bind';
 import styles from './AccountItem.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleCheck } from '@fortawesome/free-solid-svg-icons';
 import Image from '~/components/Image/index';
+
 const cx = classNames.bind(styles);
 
-const AccountItem = () => {
+const AccountItem = ({ data }) => {
     return (
-        <div className={cx('wrapper')}>
-            <Image
-                className={cx('avatar')}
-                src="https://p16-sign-va.tiktokcdn.com/tos-useast2a-avt-0068-giso/6389d4daedc46c24becb210be44bec2e~c5_100x100.jpeg?x-expires=1665943200&x-signature=h4fz6kPlhezGuEfNphGum%2BCKrx8%3D"
-                alt="name"
-            />
+        <Link to={`/@${data.nickname}`} className={cx('wrapper')}>
+            <Image className={cx('avatar')} src={data.avatar} alt={data.full_name} />
             <div className={cx('info')}>
                 <h4 className={cx('name')}>
-                    <span>vuong xuan chien</span>
-                    <FontAwesomeIcon className={cx('check')} icon={faCircleCheck} />
+                    <span>{data.nickname}</span>
+                    {data.tick && <FontAwesomeIcon className={cx('check')} icon={faCircleCheck} />}
                 </h4>
-                <span className={cx('username')}>chienvuong302</span>
+                <span className={cx('username')}>{data.full_name}</span>
             </div>
-        </div>
+        </Link>
     );
 };
 
