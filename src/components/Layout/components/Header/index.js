@@ -2,14 +2,10 @@ import React, { useState, useEffect } from 'react';
 import classNames from 'classnames/bind';
 import styles from './Header.module.scss';
 import images from '~/assets/images';
-import HeadLess from '@tippyjs/react/headless';
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
-    faCircleXmark,
-    faSpinner,
-    faMagnifyingGlass,
     faPlus,
     faEllipsisVertical,
     faEarthAsia,
@@ -21,12 +17,11 @@ import {
     faUser,
     faArrowRightFromBracket,
 } from '@fortawesome/free-solid-svg-icons';
-import Wrapper from '~/components/Popper/Wrapper';
-import AccountItem from '~/components/AccountItem';
 import Button from '~/components/Button';
 import Menu from '~/components/Popper/Menu';
 import { IconInbox, IconMessage } from '~/components/Icons';
 import Image from '~/components/Image';
+import Search from '../Search';
 const cx = classNames.bind(styles);
 
 const MENU_ITEMS = [
@@ -61,11 +56,6 @@ const MENU_ITEMS = [
 ];
 
 const Header = () => {
-    const [searchResult, setSearchResult] = useState([]);
-    useEffect(() => {
-        setTimeout(() => setSearchResult([]), 0);
-    }, []);
-
     const handleMenuChange = (item) => {
         console.log(item);
     };
@@ -106,32 +96,10 @@ const Header = () => {
                 <div className={cx('logo')}>
                     <img src={images.logo} alt="Tiktok" />
                 </div>
-                <HeadLess
-                    interactive={true}
-                    visible={searchResult.length > 0}
-                    render={(attrs) => (
-                        <div className={cx('search-result')} tabIndex="-1" {...attrs}>
-                            <Wrapper>
-                                <h4 className={cx('search-title')}>Account</h4>
-                                <AccountItem />
-                                <AccountItem />
-                                <AccountItem />
-                                <AccountItem />
-                            </Wrapper>
-                        </div>
-                    )}
-                >
-                    <div className={cx('search')}>
-                        <input placeholder="Search accounts and videos" />
-                        <button className={cx('clear')}>
-                            <FontAwesomeIcon icon={faCircleXmark} />
-                        </button>
-                        <FontAwesomeIcon className={cx('loading')} icon={faSpinner} />
-                        <button className={cx('search-btn')}>
-                            <FontAwesomeIcon icon={faMagnifyingGlass} />
-                        </button>
-                    </div>
-                </HeadLess>
+
+                {/* search */}
+                <Search />
+
                 <div className={cx('actions')}>
                     {currentUser ? (
                         <>
@@ -161,7 +129,7 @@ const Header = () => {
                         {currentUser ? (
                             <Image
                                 className={cx('user-avatar')}
-                                src="ttps://p16-sign-va.tiktokcdn.com/tos-useast2a-avt-0068-giso/6389d4daedc46c24becb210be44bec2e~c5_100x100.jpeg?x-expires=1665943200&x-signature=h4fz6kPlhezGuEfNphGum%2BCKrx8%3D"
+                                src="https://p16-sign-va.tiktokcdn.com/tos-useast2a-avt-0068-giso/6389d4daedc46c24becb210be44bec2e~c5_100x100.jpeg?x-expires=1665943200&x-signature=h4fz6kPlhezGuEfNphGum%2BCKrx8%3D"
                                 alt="ten"
                             />
                         ) : (
