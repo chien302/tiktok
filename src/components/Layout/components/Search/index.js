@@ -6,6 +6,7 @@ import { faCircleXmark, faSpinner, faMagnifyingGlass } from '@fortawesome/free-s
 import HeadLess from '@tippyjs/react/headless';
 import Wrapper from '~/components/Popper/Wrapper';
 import AccountItem from '~/components/AccountItem';
+import { useDebouned } from '~/hooks';
 const cx = classNames.bind(styles);
 
 const Search = () => {
@@ -14,6 +15,7 @@ const Search = () => {
     const [showResult, setShowResult] = useState(true);
     const [loading, setLoading] = useState(false);
 
+    const debouned = useDebouned(searchValue, 500);
     const inputRef = useRef();
 
     useEffect(() => {
@@ -22,7 +24,7 @@ const Search = () => {
             return;
         }
         setLoading(true);
-        fetch(`https://tiktok.fullstack.edu.vn/api/users/search?q=${encodeURIComponent(searchValue)}&type=less`)
+        fetch(`https://tiktok.fullstack.edu.vn/api/users/search?q=${encodeURIComponent(debouned)}&type=less`)
             .then((res) => res.json())
             .then((res) => {
                 setSearchResult(res.data);
@@ -31,7 +33,7 @@ const Search = () => {
             .catch(() => {
                 setLoading(false);
             });
-    }, [searchValue]);
+    }, [debouned]);
 
     const handleHideResult = () => {
         setShowResult(false);
