@@ -8,7 +8,7 @@ import Header from './Header';
 
 const cx = classNames.bind(styles);
 
-const Menu = ({ children, items = [], onChange }) => {
+const Menu = ({ children, hideOnClick = false, items = [], onChange }) => {
     const [history, setHistory] = useState([{ data: items }]);
     const current = history[history.length - 1];
 
@@ -34,8 +34,8 @@ const Menu = ({ children, items = [], onChange }) => {
         <Tippy
             interactive={true}
             delay={[0, 700]}
-            // visible
             offset={[20, 10]}
+            hideOnClick={hideOnClick}
             placement="bottom-end"
             render={(attrs) => (
                 <div className={cx('menu-list')} tabIndex="-1" {...attrs}>
@@ -46,7 +46,8 @@ const Menu = ({ children, items = [], onChange }) => {
                                 onBack={() => setHistory((prev) => prev.slice(0, prev.length - 1))}
                             />
                         )}
-                        {renderItem()}
+                        <div className={cx('menu-body')}>{renderItem()}</div>
+                        {/* {renderItem()} */}
                     </Wrapper>
                 </div>
             )}

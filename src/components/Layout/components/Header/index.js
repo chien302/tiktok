@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import classNames from 'classnames/bind';
 import styles from './Header.module.scss';
 import images from '~/assets/images';
@@ -17,6 +17,9 @@ import {
     faUser,
     faArrowRightFromBracket,
 } from '@fortawesome/free-solid-svg-icons';
+import { Link } from 'react-router-dom';
+import routesConfig from '~/config/routes';
+
 import Button from '~/components/Button';
 import Menu from '~/components/Popper/Menu';
 import { IconInbox, IconMessage } from '~/components/Icons';
@@ -93,9 +96,9 @@ const Header = () => {
     return (
         <header className={cx('wrapper')}>
             <div className={cx('inner')}>
-                <div className={cx('logo')}>
+                <Link to={routesConfig.home} className={cx('logo')}>
                     <img src={images.logo} alt="Tiktok" />
-                </div>
+                </Link>
 
                 {/* search */}
                 <Search />
