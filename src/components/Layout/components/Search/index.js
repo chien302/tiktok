@@ -7,6 +7,8 @@ import HeadLess from '@tippyjs/react/headless';
 import Wrapper from '~/components/Popper/Wrapper';
 import AccountItem from '~/components/AccountItem';
 import { useDebouned } from '~/hooks';
+import * as searchService from '~/apiServices/searchService';
+
 const cx = classNames.bind(styles);
 
 const Search = () => {
@@ -23,16 +25,13 @@ const Search = () => {
             setSearchResult([]);
             return;
         }
-        setLoading(true);
-        fetch(`https://tiktok.fullstack.edu.vn/api/users/search?q=${encodeURIComponent(debouned)}&type=less`)
-            .then((res) => res.json())
-            .then((res) => {
-                setSearchResult(res.data);
-                setLoading(false);
-            })
-            .catch(() => {
-                setLoading(false);
-            });
+        const fetchApi = async () => {
+            setLoading(true);
+            const result = await searchService.search(debouned);
+            setSearchResult(result);
+            setLoading(false);
+        };
+        fetchApi();
     }, [debouned]);
 
     const handleHideResult = () => {
