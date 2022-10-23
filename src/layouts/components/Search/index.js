@@ -7,7 +7,7 @@ import HeadLess from '@tippyjs/react/headless';
 import Wrapper from '~/components/Popper/Wrapper';
 import AccountItem from '~/components/AccountItem';
 import { useDebouned } from '~/hooks';
-import * as searchService from '~/apiServices/searchService';
+import * as searchService from '~/services/searchService';
 
 const cx = classNames.bind(styles);
 
