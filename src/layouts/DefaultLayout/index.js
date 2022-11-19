@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Header from '~/layouts/components/Header';
-import SideBar from './Sidebar';
+import SideBar from '../components/Sidebar';
 import styles from './DefaultLayout.module.scss';
 import classNames from 'classnames/bind';
 
