@@ -1,0 +1,12 @@
+.wrapper {
+    // width: 2900px;
+    position: relative;
+}
+.container {
+    display: flex;
+    margin-top: var(--default-layout-header-height);
+}
+.content {
+    padding: 32px 24px;
+    width: 100%;
+}

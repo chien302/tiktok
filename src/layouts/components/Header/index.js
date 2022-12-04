@@ -1,7 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
 import classNames from 'classnames/bind';
-import styles from './Header.module.scss';
-import images from '~/assets/images';
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -18,6 +16,8 @@ import {
     faArrowRightFromBracket,
 } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
+import styles from './Header.module.scss';
+import images from '~/assets/images';
 import routesConfig from '~/config/routes';
 
 import Button from '~/components/Button';
@@ -25,6 +25,8 @@ import Menu from '~/components/Popper/Menu';
 import { IconInbox, IconMessage } from '~/components/Icons';
 import Image from '~/components/Image';
 import Search from '../Search';
+import MenuLogin from '../MenuLogin';
+
 const cx = classNames.bind(styles);
 
 const MENU_ITEMS = [
@@ -34,6 +36,56 @@ const MENU_ITEMS = [
         children: {
             title: 'Language',
             data: [
+                {
+                    type: 'language',
+                    code: 'en',
+                    title: 'English',
+                },
+                {
+                    type: 'language',
+                    code: 'vi',
+                    title: 'Tiếng Việt',
+                },
+                {
+                    type: 'language',
+                    code: 'en',
+                    title: 'English',
+                },
+                {
+                    type: 'language',
+                    code: 'vi',
+                    title: 'Tiếng Việt',
+                },
+                {
+                    type: 'language',
+                    code: 'en',
+                    title: 'English',
+                },
+                {
+                    type: 'language',
+                    code: 'vi',
+                    title: 'Tiếng Việt',
+                },
+                {
+                    type: 'language',
+                    code: 'en',
+                    title: 'English',
+                },
+                {
+                    type: 'language',
+                    code: 'vi',
+                    title: 'Tiếng Việt',
+                },
+                {
+                    type: 'language',
+                    code: 'en',
+                    title: 'English',
+                },
+                {
+                    type: 'language',
+                    code: 'vi',
+                    title: 'Tiếng Việt',
+                },
                 {
                     type: 'language',
                     code: 'en',
@@ -58,17 +110,23 @@ const MENU_ITEMS = [
     },
 ];
 
-const Header = () => {
-    const handleMenuChange = (item) => {
-        console.log(item);
+const Header = ({ wider }) => {
+    const [isShowMenuLogin, setIsShowMenuLogin] = useState(false);
+
+    const handleLogin = () => {
+        setIsShowMenuLogin(!isShowMenuLogin);
     };
-    const currentUser = true;
+    const handleCloseModal = () => {
+        setIsShowMenuLogin(false);
+    };
+    const currentUser = JSON.parse(localStorage.getItem('user'));
+    // console.log(currentUser.nickname);
 
     const userMenu = [
         {
             icon: <FontAwesomeIcon icon={faUser} />,
             title: 'View profile',
-            to: '/@chien302',
+            to: `/@${currentUser?.nickname}` || '',
         },
         {
             icon: <FontAwesomeIcon icon={faCoins} />,
@@ -89,61 +147,80 @@ const Header = () => {
         {
             icon: <FontAwesomeIcon icon={faArrowRightFromBracket} />,
             title: 'Log out',
-            to: '/logout',
+            to: '/',
             separate: true,
+            type: 'logout',
         },
     ];
+    const handleMenuChange = (item) => {
+        console.log(item);
+        // switch (item.to) {
+        //     case '/@profile':
+        //         item.to = currentUser.nickname;
+        //         console.log('sdf');
+        //         break;
+        //     default:
+        //         break;
+        // }
+    };
+    const handleUpload = () => {
+        window.location.href = 'upload';
+        console.log('upload');
+    };
     return (
-        <header className={cx('wrapper')}>
-            <div className={cx('inner')}>
-                <Link to={routesConfig.home} className={cx('logo')}>
-                    <img src={images.logo} alt="Tiktok" />
-                </Link>
+        <>
+            <header className={cx(`${wider ? 'wider' : 'wrapper'}`)}>
+                <div className={cx('inner')}>
+                    <Link to={routesConfig.home} className={cx('logo')}>
+                        <img src={images.logo} alt="Tiktok" />
+                    </Link>
 
-                {/* search */}
-                <Search />
+                    {/* search */}
+                    <Search />
 
-                <div className={cx('actions')}>
-                    {currentUser ? (
-                        <>
-                            <Button text>
-                                <FontAwesomeIcon icon={faPlus} /> Upload
-                            </Button>
-                            <Tippy placement="bottom" content="Message">
-                                <button className={cx('actions-btn')}>
-                                    <IconMessage />
-                                </button>
-                            </Tippy>
-                            <Tippy placement="bottom" content="Inbox">
-                                <button className={cx('actions-btn')}>
-                                    <IconInbox />
-                                </button>
-                            </Tippy>
-                        </>
-                    ) : (
-                        <>
-                            <Button text>
-                                <FontAwesomeIcon icon={faPlus} /> Upload
-                            </Button>
-                            <Button primary>Log in</Button>
-                        </>
-                    )}
-                    <Menu items={currentUser ? userMenu : MENU_ITEMS} onChange={handleMenuChange}>
+                    <div className={cx('actions')}>
                         {currentUser ? (
-                            <Image
-                                className={cx('user-avatar')}
-                                src="https://p16-sign-va.tiktokcdn.com/tos-useast2a-avt-0068-giso/6389d4daedc46c24becb210be44bec2e~c5_100x100.jpeg?x-expires=1665943200&x-signature=h4fz6kPlhezGuEfNphGum%2BCKrx8%3D"
-                                alt="ten"
-                            />
+                            <>
+                                <Link to={routesConfig.upload}>
+                                    <Button text>
+                                        <FontAwesomeIcon icon={faPlus} /> Upload
+                                    </Button>
+                                </Link>
+                                <Tippy placement="bottom" content="Message">
+                                    <button className={cx('actions-btn')}>
+                                        <IconMessage />
+                                    </button>
+                                </Tippy>
+                                <Tippy placement="bottom" content="Inbox">
+                                    <button className={cx('actions-btn')}>
+                                        <IconInbox />
+                                    </button>
+                                </Tippy>
+                            </>
                         ) : (
-                            <button className={cx('more-btn')}>
-                                <FontAwesomeIcon icon={faEllipsisVertical} />
-                            </button>
+                            <>
+                                <Button text>
+                                    <FontAwesomeIcon icon={faPlus} /> Upload
+                                </Button>
+                                <Button primary onClick={handleLogin}>
+                                    Log in
+                                </Button>
+                            </>
                         )}
-                    </Menu>
+                        <Menu items={currentUser ? userMenu : MENU_ITEMS} onChange={handleMenuChange}>
+                            {currentUser ? (
+                                <Image className={cx('user-avatar')} src={currentUser.avatar} alt="ten" />
+                            ) : (
+                                <button className={cx('more-btn')}>
+                                    <FontAwesomeIcon icon={faEllipsisVertical} />
+                                </button>
+                            )}
+                        </Menu>
+                    </div>
                 </div>
-            </div>
-        </header>
+            </header>
+            {isShowMenuLogin && <MenuLogin onClose={handleCloseModal} />}
+        </>
     );
 };
 

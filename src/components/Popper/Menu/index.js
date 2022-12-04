@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Tippy from '@tippyjs/react/headless';
 import classNames from 'classnames/bind';
@@ -6,12 +7,32 @@ import styles from './Menu.module.scss';
 import { Wrapper } from '~/components/Popper';
 import MenuItem from './MenuItem';
 import Header from './Header';
+import * as authService from '~/services/authService';
 
 const cx = classNames.bind(styles);
 
 const Menu = ({ children, hideOnClick = false, items = [], onChange }) => {
     const [history, setHistory] = useState([{ data: items }]);
+    // const [isLogout, setIsLogout] = useState(false);
     const current = history[history.length - 1];
+    const navigate = useNavigate();
+    const logout = () => {
+        authService
+            .logout()
+            .then(() => {
+                localStorage.removeItem('user');
+                // navigate('/');
+                navigate('/');
+                window.location.reload();
+            })
+            .catch((error) => console.log(error));
+    };
+    // logout();
+    const handleClickOption = (item) => {
+        if (item.type && item.type === 'logout') {
+            logout();
+        }
+    };
 
     const renderItem = () => {
         return current.data.map((item, index) => {
@@ -20,13 +41,24 @@ const Menu = ({ children, hideOnClick = false, items = [], onChange }) => {
                 <MenuItem
                     key={index}
                     data={item}
-                    onClick={() => {
-                        if (isParent) {
-                            setHistory((prev) => [...prev, item.children]);
-                        } else {
-                            onChange(item);
-                        }
-                    }}
+                    onClick={
+                        () => handleClickOption(item)
+                        // () => {
+                        // if (isParent) {
+                        //     setHistory((prev) => [...prev, item.children]);
+                        //     console.log(item.children);
+                        // } else {
+                        // onChange(item);
+                        // if (item.children.type) {
+                        //     console.log(item.children.type);
+                        // }
+                        // if (item.children.type === 'logout') {
+                        //     logout();
+                        //     console.log(isLogout);
+                        // }
+                        // }
+                        // }
+                    }
                 />
             );
         });

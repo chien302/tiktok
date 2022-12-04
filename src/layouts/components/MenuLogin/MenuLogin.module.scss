@@ -1,0 +1,100 @@
+.wrapper {
+    position: relative;
+    width: 482px;
+    height: 693px;
+    background-color: white;
+    z-index: 100;
+    margin: auto;
+    border-radius: 8px;
+}
+.header {
+    position: absolute;
+    right: 2.4rem;
+    top: 2.4rem;
+    width: 4rem;
+    height: 4rem;
+    // float: right;
+    // width: 40.8px;
+    // height: 40.8px;
+    border-radius: 50%;
+    background: rgba(22, 24, 35, 0.03);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    svg {
+        font-size: 2.4rem;
+        width: 2.5rem;
+        height: 2.5rem;
+    }
+}
+.content {
+    padding-top: 4.8rem;
+}
+.content-first {
+    height: 600px;
+    overflow: auto;
+}
+.heading {
+    p {
+        font-size: 3.2rem;
+        text-align: center;
+        font-weight: bold;
+        margin: 16px 0;
+    }
+}
+
+.content-social {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    .social-icons {
+        margin-bottom: 2rem;
+        a {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 375px;
+            margin: auto;
+            padding: 0 12px;
+            border: 1px solid rgba(22, 24, 35, 0.12);
+            height: 44px;
+            margin-bottom: 1.6rem;
+            svg {
+                position: absolute;
+                left: 1.2rem;
+            }
+            span {
+                font-size: 1.5rem;
+                // color: #000;
+                font-family: 'IBM Plex Sans', ProximaNova, Arial, Tahoma, PingFangSC, sans-serif;
+            }
+        }
+    }
+}
+.btn-auth {
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-top: 1px solid rgba(22, 24, 35, 0.12);
+    background-color: white;
+    height: 64px;
+    width: 100%;
+    z-index: 1000;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+
+    p {
+        margin: 0;
+    }
+    .btn-signup {
+        margin-left: 5px;
+        font-weight: 600;
+        font-size: 15px;
+        line-height: 18px;
+        color: rgb(254, 44, 85);
+    }
+}

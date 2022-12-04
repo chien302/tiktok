@@ -1,0 +1,47 @@
+.wrapper {
+    padding: 12px 2rem 12px;
+    border-radius: 8px;
+    width: 320px;
+}
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+}
+.avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    object-fit: contain;
+}
+.button {
+    padding: 6px 28px;
+}
+.nickname {
+    font-size: 1.8rem;
+}
+.icon-check {
+    margin-left: 4px;
+    color: rgb(32, 213, 236);
+}
+.name {
+    font-size: 1.4rem;
+    line-height: 1;
+}
+.nickname,
+.name,
+.analytics {
+    margin: 0;
+}
+.analytics {
+    margin-top: 16px;
+    font-size: 1.7rem;
+    line-height: 1;
+    strong {
+        margin-right: 6px;
+    }
+    span {
+        margin-right: 12px;
+    }
+}
